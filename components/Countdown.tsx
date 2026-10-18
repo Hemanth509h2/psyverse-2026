@@ -54,7 +54,7 @@ export function Countdown() {
       aria-live="off"
       aria-label="Time until PSYVERSE 2026 begins"
     >
-      <span className="flex w-[clamp(3.6rem,23vw,8rem)] shrink-0 items-center self-stretch border-r border-[#ddd3ea] pr-2 text-[clamp(0.45rem,1.85vw,0.75rem)] leading-[1.9] font-medium tracking-[0.18em] text-[#4b4f5e] uppercase">
+      <span className="flex w-[clamp(3.6rem,23vw,8rem)] shrink-0 text-left lg:w-36 items-center self-stretch border-r border-[#ddd3ea] pr-2 text-[clamp(0.45rem,1.85vw,0.75rem)] leading-[1.9] font-medium tracking-[0.18em] text-[#4b4f5e] uppercase">
         The conclave begins in
       </span>
       <div className="grid flex-1 grid-cols-4 gap-[clamp(0.35rem,1.9vw,0.6rem)]">

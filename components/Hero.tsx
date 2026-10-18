@@ -50,6 +50,23 @@ function PeopleIcon({ className }: { className: string }) {
   );
 }
 
+/** The purple call to action with the closing date under it. */
+function ReserveButton() {
+  return (
+    <>
+      <a
+        href="#register"
+        className="inline-flex items-center justify-center gap-3.5 rounded-full bg-[linear-gradient(135deg,#7a45c5_0%,#5b2fa5_100%)] px-[2.6rem] py-2.5 text-[1rem] font-semibold text-white shadow-[0_14px_28px_-12px_rgb(91_47_165_/_0.7)] transition-transform duration-200 hover:-translate-y-0.5 sm:px-12 sm:py-3.5 sm:text-lg"
+      >
+        Reserve Your Seat <LineIcon name="arrow" className="h-5 w-5" />
+      </a>
+      <span className="text-[clamp(0.72rem,2.65vw,0.95rem)] text-[#5b6070]">
+        Registration closes on <span className="text-navy">{site.deadline}</span>
+      </span>
+    </>
+  );
+}
+
 /** Line drawing of a head in profile with a looping brain, for the theme card. */
 function MindProfile({ className }: { className?: string }) {
   return (
@@ -119,15 +136,15 @@ export function Hero() {
 
           {/* the theme */}
           <Reveal immediate delay={0.16} className="mt-4">
-            <figure className="relative isolate overflow-hidden rounded-[1.25rem] bg-[linear-gradient(100deg,#f6f1fc_0%,#f1e9fa_100%)] px-[5.3vw] py-[4.4vw] sm:px-6 sm:py-5 md:rounded-[1.75rem] md:p-10">
-              <MindProfile className="pointer-events-none absolute right-0 bottom-0 -z-10 h-[91%] w-auto text-[#7a4cc0]" />
+            <figure className="relative isolate overflow-hidden rounded-[1.25rem] bg-[linear-gradient(100deg,#f6f1fc_0%,#f1e9fa_100%)] px-[5.3vw] py-[4.4vw] sm:px-6 sm:py-5 md:rounded-[1.75rem] md:p-10 lg:px-9 lg:py-7">
+              <MindProfile className="pointer-events-none absolute right-0 bottom-0 -z-10 h-[91%] w-auto text-[#7a4cc0] lg:right-12 lg:h-[82%] lg:overflow-visible" />
               <figcaption className="text-[0.56rem] font-semibold tracking-[0.28em] text-purple uppercase sm:text-xs">The conclave theme</figcaption>
               <blockquote className="mt-3 font-display">
-                <span className="block max-w-[7.4em] text-[clamp(1.35rem,7vw,2.9rem)] leading-[1.02] font-bold text-navy">{site.theme.lead}</span>
+                <span className="block max-w-[7.4em] text-[clamp(1.35rem,7vw,2.9rem)] lg:text-[2.35rem] leading-[1.02] font-bold text-navy">{site.theme.lead}</span>
                 {site.theme.lines.map((l, i) => (
                   <span
                     key={l}
-                    className={`block text-[clamp(0.95rem,4.8vw,2.2rem)] leading-[1.08] ${i === 2 ? "font-bold text-purple italic" : "text-[#55586a]"} ${i === 0 ? "mt-1" : ""}`}
+                    className={`block text-[clamp(0.95rem,4.8vw,2.2rem)] leading-[1.08] lg:text-[1.65rem] ${i === 2 ? "font-bold text-purple italic" : "text-[#55586a]"} ${i === 0 ? "mt-1" : ""}`}
                   >
                     {l}
                   </span>
@@ -137,26 +154,18 @@ export function Hero() {
           </Reveal>
 
           {/* register */}
-          <Reveal immediate delay={0.2} className="mt-4 flex flex-col items-center gap-2.5 text-center sm:mt-6 lg:items-start lg:text-left">
-            <a
-              href="#register"
-              className="inline-flex items-center justify-center gap-3.5 rounded-full bg-[linear-gradient(135deg,#7a45c5_0%,#5b2fa5_100%)] px-[2.6rem] py-2.5 text-[1rem] font-semibold text-white shadow-[0_14px_28px_-12px_rgb(91_47_165_/_0.7)] transition-transform duration-200 hover:-translate-y-0.5 sm:px-12 sm:py-3.5 sm:text-lg"
-            >
-              Reserve Your Seat <LineIcon name="arrow" className="h-5 w-5" />
-            </a>
-            <span className="text-[clamp(0.72rem,2.65vw,0.95rem)] text-[#5b6070]">
-              Registration closes on <span className="text-navy">{site.deadline}</span>
-            </span>
+          <Reveal immediate delay={0.2} className="mt-4 flex flex-col items-center gap-2.5 text-center sm:mt-6 lg:hidden">
+            <ReserveButton />
           </Reveal>
 
-          <Reveal immediate delay={0.24} className="mt-4 sm:mt-6">
+          <Reveal immediate delay={0.24} className="mt-4 sm:mt-6 lg:hidden">
             <Countdown />
           </Reveal>
         </div>
 
         {/* right: the illustration in layered paper */}
-        <Reveal immediate delay={0.12} className="relative min-w-0">
-          <div className="relative mx-auto w-full max-w-[640px]">
+        <Reveal immediate delay={0.12} className="relative min-w-0 lg:mt-2 lg:self-start">
+          <div className="relative mx-auto w-full max-w-[640px] lg:max-w-[27rem]">
             {/* background blob */}
             <svg viewBox="0 0 600 600" className="pointer-events-none absolute -inset-[8%] -z-10 h-[116%] w-[116%]" aria-hidden="true">
               <Wash d="M70,300 C40,150 170,40 320,50 C470,60 570,170 550,320 C530,470 410,560 280,550 C140,540 95,430 70,300 Z" fill={C.lav} opacity={0.22} />
@@ -181,6 +190,14 @@ export function Hero() {
               <path d="M20,70 C30,30 80,20 104,40 C90,80 50,96 20,70 Z" fill={C.sageMist} filter="url(#paper)" />
               <path d="M28,68 C50,56 74,46 98,42" stroke={C.sage} strokeWidth="1.5" fill="none" />
             </svg>
+
+            {/* laptops: register and countdown under the illustration, visible without scrolling */}
+            <div className="relative z-10 mt-10 hidden flex-col items-center gap-2.5 text-center lg:-mx-12 lg:flex">
+              <ReserveButton />
+              <div className="mt-3 w-full">
+                <Countdown />
+              </div>
+            </div>
           </div>
         </Reveal>
       </div>
