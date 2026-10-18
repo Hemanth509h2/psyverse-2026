@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #faf7f2;
+  --color-beige: #f3eee8;
+  --color-lavender: #b8a9d9;
+  --color-lavender-deep: #8b7bb8;
+  --color-lavender-mist: #ece7f5;
+  --color-sage: #a8b5a2;
+  --color-sage-mist: #e7ebe4;
+  --color-ink: #2d2d2d;
+  --color-muted: #6b7280;
+  --color-gold: #d4b483;
+  --color-gold-mist: #f4ebdc;
+  --color-line: #e6dfd5;
+  --color-teal: #009688;
+  --color-teal-mist: #e3f1ee;
+  --color-teal-dark: #00796b;
+  --color-purple: #6b3fa8;
+  --color-purple-mist: #f3edfb;
+
+  --font-display: var(--font-playfair), "Georgia", "Times New Roman", serif;
+  --font-sans: var(--font-inter), "Segoe UI", system-ui, sans-serif;
+
+  --shadow-soft: 0 1px 2px rgb(45 45 45 / 0.04), 0 12px 32px -12px rgb(139 123 184 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(45 45 45 / 0.05), 0 24px 48px -18px rgb(139 123 184 / 0.28);
+  --shadow-paper: 0 1px 1px rgb(45 45 45 / 0.04), 0 10px 24px -10px rgb(139 123 184 / 0.22);
+  --shadow-glow: 0 0 0 6px rgb(184 169 217 / 0.22), 0 28px 56px -18px rgb(139 123 184 / 0.55);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    background: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  /* Paper grain over the whole page, barely visible */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.045;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.3  0 0 0 0 0.25  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>");
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+  /* Playfair defaults to old-style figures; dates and numbers read better at full height */
+  h1, h2, h3, h4, .font-display {
+    font-variant-numeric: lining-nums;
+  }
+  ::selection {
+    background: var(--color-lavender-mist);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-lavender-deep);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 87.5rem;
+    margin-inline: auto;
+    padding-left: max(1.25rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
+  }
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-lavender-deep);
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 999px;
+    padding: 0.95rem 1.75rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #fff;
+    background-image: linear-gradient(135deg, #b8a9d9 0%, #8b7bb8 100%);
+    box-shadow: 0 10px 24px -12px rgb(139 123 184 / 0.7);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    filter: saturate(1.08);
+    box-shadow: 0 16px 30px -14px rgb(139 123 184 / 0.75);
+  }
+  .btn-lg {
+    padding: 18px 36px;
+    font-size: 1.1875rem;
+    box-shadow: 0 14px 30px -12px rgb(139 123 184 / 0.75);
+  }
+  .btn-primary.btn-lg:hover {
+    box-shadow: 0 0 0 6px rgb(184 169 217 / 0.25), 0 20px 36px -14px rgb(139 123 184 / 0.8);
+  }
+  .btn-secondary.btn-lg {
+    padding: 17px 32px;
+    font-size: 1.0625rem;
+    box-shadow: none;
+  }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 999px;
+    padding: 0.95rem 1.75rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-lavender-deep);
+    background: #fff;
+    border: 1px solid var(--color-lavender);
+    transition: transform 0.25s ease, background-color 0.25s ease;
+  }
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+    background: var(--color-lavender-mist);
+  }
+  .card {
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgb(230 223 213 / 0.7);
+  }
+  /* A beige band that fades in and out of the ivory page, so sections blend instead of cutting */
+  .band {
+    background: linear-gradient(to bottom, var(--color-ivory) 0%, var(--color-beige) 14%, var(--color-beige) 86%, var(--color-ivory) 100%);
+  }
+  .section {
+    padding-block: 7rem;
+  }
+  @media (min-width: 768px) {
+    .section { padding-block: 10rem; }
+  }
+  .float-slow { animation: float-slow 22s ease-in-out infinite alternate; }
+  .float-slower { animation: float-slow 30s ease-in-out infinite alternate-reverse; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes float-slow {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(14px, -18px, 0) rotate(4deg); }
+  100% { transform: translate3d(-10px, 10px, 0) rotate(-3deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
