@@ -7,27 +7,60 @@ import { LineIcon } from "./illustrations/icons";
 import { Parallax } from "./Parallax";
 import { Reveal } from "./Reveal";
 
-const chips = [
-  { icon: "calendar" as const, title: site.date, sub: site.time },
-  { icon: "pin" as const, title: `${site.venue.room}, ${site.venue.institute}`, sub: site.venue.city },
-  { icon: "people" as const, title: "Experts, Researchers & Innovators", sub: "" },
-];
-
 // Matches the arch drawn in the illustration, so the paper layers line up with it.
 const archBox = "absolute top-[4.4%] right-[5%] bottom-[3%] left-[5%]";
 const archRadius = "50% 50% 0 0 / 43% 43% 0 0";
 
+/* Solid purple icons for the three info chips */
+function CalendarIcon({ className }: { className: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={`shrink-0 text-purple ${className}`} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+      <rect x="3" y="5" width="18" height="16" rx="3" />
+      <path d="M3 10h18M8 3v4M16 3v4" />
+      <g fill="currentColor" stroke="none">
+        <circle cx="8" cy="14" r="1.2" />
+        <circle cx="12" cy="14" r="1.2" />
+        <circle cx="16" cy="14" r="1.2" />
+        <circle cx="8" cy="17.6" r="1.2" />
+        <circle cx="12" cy="17.6" r="1.2" />
+      </g>
+    </svg>
+  );
+}
+
+function PinIcon({ className }: { className: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={`shrink-0 text-purple ${className}`} aria-hidden="true">
+      <path d="M12 22.5s-7.5-6.6-7.5-12.4a7.5 7.5 0 0 1 15 0c0 5.8-7.5 12.4-7.5 12.4z" fill="currentColor" />
+      <circle cx="12" cy="10" r="2.8" fill="#fff" />
+    </svg>
+  );
+}
+
+function PeopleIcon({ className }: { className: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={`shrink-0 text-purple ${className}`} fill="currentColor" aria-hidden="true">
+      <circle cx="12" cy="7.6" r="3.2" />
+      <path d="M5.6 19.5c0-3.7 2.9-6.4 6.4-6.4s6.4 2.7 6.4 6.4z" />
+      <circle cx="5" cy="9.4" r="2.4" />
+      <path d="M0.6 18.6c0-2.8 1.9-4.7 4.3-4.7 1 0 1.9.3 2.6.9-1.4 1.1-2.3 2.3-2.6 3.8z" />
+      <circle cx="19" cy="9.4" r="2.4" />
+      <path d="M23.4 18.6c0-2.8-1.9-4.7-4.3-4.7-1 0-1.9.3-2.6.9 1.4 1.1 2.3 2.3 2.6 3.8z" />
+    </svg>
+  );
+}
+
 /** Line drawing of a head in profile with a looping brain, for the theme card. */
 function MindProfile({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 200 240" className={className} fill="none" aria-hidden="true">
-      <circle cx="150" cy="120" r="105" fill="#e9dff7" />
-      <g stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M150,240 C150,205 158,188 170,166 C192,130 190,70 150,42 C120,20 72,22 52,52 C40,70 42,86 40,96 L24,121 C21,125 25,128 31,129 L33,139 C29,143 31,147 35,148 L35,156 C35,166 41,171 53,171 C65,171 73,174 75,188 L77,240" />
-        <path d="M96,96 C86,76 106,58 121,68 C131,50 162,62 153,83 C169,93 161,119 141,113 C136,129 110,127 108,111 C90,116 85,101 96,96 Z" />
-        <path d="M114,82 C122,75 133,83 127,92 C121,99 111,93 116,87" />
-        <path d="M134,98 C143,96 147,107 139,110" />
-        <path d="M128,118 C126,135 122,148 112,160" />
+    <svg viewBox="0 0 138 188" className={className} fill="none" aria-hidden="true">
+      <circle cx="95" cy="90" r="95" fill="#ebe2f7" opacity="0.75" />
+      <g stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M53,188 C47,172 36,162 25,157 C19,154 15,152 16,149 L14,142 L9,137 L11,132 L8,128 L11,123 L3.5,114 L12,97 C13,80 17,66 25,55 C36,40 50,33 65,31 C92,28 115,42 120,65 C125,88 122,115 122,140 C122,160 128,172 136,182" />
+        <path d="M45,80 C40,62 55,50 72,52 C90,54 100,62 104,74 C108,88 98,100 84,98 C74,97 70,88 77,84 C84,80 90,88 85,93" />
+        <path d="M60,70 C62,62 72,60 75,66 C78,72 70,76 66,72" />
+        <path d="M88,66 C94,64 98,70 94,74" />
+        <path d="M60,88 C56,96 62,104 70,100" />
       </g>
     </svg>
   );
@@ -38,52 +71,63 @@ export function Hero() {
     <section id="top" className="relative isolate overflow-hidden">
       <PaperLayers className="absolute right-0 bottom-0 left-0 -z-10 h-40 w-full md:h-56" />
 
-      <div className="wrap grid items-center gap-12 pt-8 pb-24 sm:pb-32 md:pt-10 lg:grid-cols-[1.12fr_1fr] lg:gap-14 lg:pb-40">
+      <div className="wrap grid items-center gap-12 pt-5 pb-24 sm:pt-8 sm:pb-32 md:pt-10 lg:grid-cols-[1.12fr_1fr] lg:gap-14 lg:pb-40">
         {/* left: what the event is, the theme, and how to register */}
         <div className="flex min-w-0 flex-col">
-          <Reveal immediate>
-            <p className="text-xs font-semibold tracking-[0.24em] text-purple uppercase sm:text-sm">A Professional Psychology Conclave</p>
-            <h1 className="mt-4 flex flex-col font-display">
-              <span className="text-[clamp(3.9rem,9vw,7.5rem)] leading-[0.95] font-black tracking-[-0.01em] text-ink">PSYVERSE</span>
-              <span className="text-[clamp(3.4rem,7.6vw,6.25rem)] leading-[1] font-bold text-purple italic">2026</span>
+          <Reveal immediate className="px-3 sm:px-0">
+            <p className="text-[0.56rem] font-semibold tracking-[0.28em] text-purple uppercase sm:text-xs">A Professional Psychology Conclave</p>
+            <h1 className="mt-1 flex flex-col font-display sm:mt-4">
+              <span className="text-[clamp(2.6rem,13.9vw,7.5rem)] leading-[0.98] font-black tracking-[-0.01em] text-navy">PSYVERSE</span>
+              <span className="text-[clamp(2.6rem,13.9vw,7.5rem)] leading-[0.95] font-extrabold text-purple italic">2026</span>
             </h1>
-            <span className="mt-5 block h-[3px] w-16 rounded-full bg-purple" aria-hidden="true" />
+            <span className="mt-4 block h-[3px] w-11 rounded-full bg-purple" aria-hidden="true" />
           </Reveal>
 
-          <Reveal immediate delay={0.08} className="mt-7">
-            <p className="font-display text-[clamp(2rem,3vw,2.6rem)] leading-[1.1] font-semibold text-ink">{site.tagline}</p>
-            <p className="mt-3 text-xl leading-snug text-[#5b6070] md:text-[1.4rem]">Exploring the Future of Mental Healthcare</p>
+          <Reveal immediate delay={0.08} className="mt-4 px-3 sm:mt-6 sm:px-0">
+            <p className="max-w-[10em] font-display text-[clamp(1.2rem,5.9vw,2.6rem)] leading-[1.08] font-semibold text-navy">{site.tagline}</p>
+            <p className="mt-1.5 max-w-[12.5em] text-[clamp(0.8rem,3.65vw,1.4rem)] leading-[1.22] text-[#5b6070]">Exploring the Future of Mental Healthcare</p>
           </Reveal>
 
           {/* date, venue and audience */}
-          <Reveal immediate delay={0.12} className="mt-8">
-            <ul className="grid grid-cols-3 gap-2.5 sm:gap-3">
-              {chips.map((c) => (
-                <li
-                  key={c.icon}
-                  className="flex flex-col items-start gap-2 rounded-2xl border border-purple-mist bg-white/80 px-3 py-3.5 shadow-[var(--shadow-paper)] sm:flex-row sm:items-center sm:gap-3 sm:px-4 sm:py-4"
-                >
-                  <LineIcon name={c.icon} className="h-6 w-6 shrink-0 text-purple sm:h-7 sm:w-7" />
-                  <span className="min-w-0 text-[0.8rem] leading-snug sm:text-sm">
-                    <span className="block font-semibold text-ink">{c.title}</span>
-                    {c.sub && <span className="block text-muted">{c.sub}</span>}
+          <Reveal immediate delay={0.12} className="mt-5">
+            <ul className="grid grid-cols-3 gap-[1.7vw] sm:gap-3">
+              <li className="flex items-center rounded-[0.9rem] border border-[#efe8f7] bg-[#fbf9fd] py-[3.2vw] pr-[0.8vw] shadow-[0_6px_16px_-10px_rgb(106_54_180_/_0.18)] sm:gap-3 sm:py-3.5 sm:pr-2 sm:pl-4 gap-[3vw] pl-[3.9vw]">
+                <CalendarIcon className="h-[4.6vw] w-[4.6vw] sm:h-6 sm:w-6" />
+                <span className="min-w-0 leading-snug whitespace-nowrap">
+                  <span className="block text-[2.75vw] text-navy sm:text-[0.95rem]">24 October</span>
+                  <span className="block text-[2.3vw] text-[#5b6070] sm:text-[0.85rem]">{site.time.replace(":00 PM", " PM")}</span>
+                </span>
+              </li>
+              <li className="flex items-center rounded-[0.9rem] border border-[#efe8f7] bg-[#fbf9fd] py-[3.2vw] pr-[0.8vw] shadow-[0_6px_16px_-10px_rgb(106_54_180_/_0.18)] sm:gap-3 sm:py-3.5 sm:pr-2 sm:pl-4 gap-[2vw] pl-[3.4vw]">
+                <PinIcon className="h-[5.2vw] w-[5.2vw] sm:h-6 sm:w-6" />
+                <span className="min-w-0 text-[1.95vw] leading-snug whitespace-nowrap sm:text-[0.85rem]">
+                  <span className="block font-semibold text-navy">{site.venue.city}, India</span>
+                  <span className="block text-[#5b6070]">
+                    {site.venue.room.replace(" Auditorium", "")}, {site.venue.institute}
                   </span>
-                </li>
-              ))}
+                </span>
+              </li>
+              <li className="flex items-center rounded-[0.9rem] border border-[#efe8f7] bg-[#fbf9fd] py-[3.2vw] pr-[0.8vw] shadow-[0_6px_16px_-10px_rgb(106_54_180_/_0.18)] sm:gap-3 sm:py-3.5 sm:pr-2 sm:pl-4 gap-[1.8vw] pl-[2.2vw]">
+                <PeopleIcon className="h-[5.6vw] w-[5.6vw] sm:h-7 sm:w-7" />
+                <span className="min-w-0 text-[1.78vw] leading-snug whitespace-nowrap text-navy sm:text-[0.85rem] sm:whitespace-normal">
+                  Experts, Researchers
+                  <br className="sm:hidden" /> &amp; Innovators
+                </span>
+              </li>
             </ul>
           </Reveal>
 
           {/* the theme */}
-          <Reveal immediate delay={0.16} className="mt-5">
-            <figure className="relative isolate overflow-hidden rounded-[2rem] bg-purple-mist px-7 py-9 md:px-11 md:py-11">
-              <MindProfile className="pointer-events-none absolute -right-6 bottom-0 -z-10 h-[88%] w-auto text-purple/80 sm:right-0" />
-              <figcaption className="text-xs font-semibold tracking-[0.24em] text-purple uppercase">The conclave theme</figcaption>
-              <blockquote className="mt-4 font-display leading-[1.1]">
-                <span className="block text-[clamp(2.1rem,3.2vw,2.9rem)] font-bold text-ink">{site.theme.lead}</span>
+          <Reveal immediate delay={0.16} className="mt-4">
+            <figure className="relative isolate overflow-hidden rounded-[1.25rem] bg-[linear-gradient(100deg,#f6f1fc_0%,#f1e9fa_100%)] px-[5.3vw] py-[4.4vw] sm:px-6 sm:py-5 md:rounded-[1.75rem] md:p-10">
+              <MindProfile className="pointer-events-none absolute right-0 bottom-0 -z-10 h-[91%] w-auto text-[#7a4cc0]" />
+              <figcaption className="text-[0.56rem] font-semibold tracking-[0.28em] text-purple uppercase sm:text-xs">The conclave theme</figcaption>
+              <blockquote className="mt-3 font-display">
+                <span className="block max-w-[7.4em] text-[clamp(1.35rem,7vw,2.9rem)] leading-[1.02] font-bold text-navy">{site.theme.lead}</span>
                 {site.theme.lines.map((l, i) => (
                   <span
                     key={l}
-                    className={`block text-[clamp(1.6rem,2.4vw,2.2rem)] ${i === 2 ? "mt-1 font-bold text-purple italic" : "text-ink/70"}`}
+                    className={`block text-[clamp(0.95rem,4.8vw,2.2rem)] leading-[1.08] ${i === 2 ? "font-bold text-purple italic" : "text-[#55586a]"} ${i === 0 ? "mt-1" : ""}`}
                   >
                     {l}
                   </span>
@@ -93,19 +137,19 @@ export function Hero() {
           </Reveal>
 
           {/* register */}
-          <Reveal immediate delay={0.2} className="mt-8 flex flex-col items-center gap-3 text-center lg:items-start lg:text-left">
+          <Reveal immediate delay={0.2} className="mt-4 flex flex-col items-center gap-2.5 text-center sm:mt-6 lg:items-start lg:text-left">
             <a
               href="#register"
-              className="inline-flex w-full max-w-sm items-center justify-center gap-3 rounded-full bg-[linear-gradient(135deg,#7b4fc4_0%,#5e35a8_100%)] px-9 py-[1.1rem] text-lg font-semibold text-white shadow-[0_16px_32px_-14px_rgb(94_53_168_/_0.75)] transition-transform duration-200 hover:-translate-y-0.5 sm:w-auto"
+              className="inline-flex items-center justify-center gap-3.5 rounded-full bg-[linear-gradient(135deg,#7a45c5_0%,#5b2fa5_100%)] px-[2.6rem] py-2.5 text-[1rem] font-semibold text-white shadow-[0_14px_28px_-12px_rgb(91_47_165_/_0.7)] transition-transform duration-200 hover:-translate-y-0.5 sm:px-12 sm:py-3.5 sm:text-lg"
             >
               Reserve Your Seat <LineIcon name="arrow" className="h-5 w-5" />
             </a>
-            <span className="text-[0.95rem] text-muted">
-              {site.fee} · Registration closes on <span className="font-medium text-ink">{site.deadline}</span>
+            <span className="text-[clamp(0.72rem,2.65vw,0.95rem)] text-[#5b6070]">
+              Registration closes on <span className="text-navy">{site.deadline}</span>
             </span>
           </Reveal>
 
-          <Reveal immediate delay={0.24} className="mt-8">
+          <Reveal immediate delay={0.24} className="mt-4 sm:mt-6">
             <Countdown />
           </Reveal>
         </div>

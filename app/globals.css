@@ -16,8 +16,9 @@
   --color-teal: #009688;
   --color-teal-mist: #e3f1ee;
   --color-teal-dark: #00796b;
-  --color-purple: #6b3fa8;
+  --color-purple: #6a36b4;
   --color-purple-mist: #f3edfb;
+  --color-navy: #1c1d2f;
 
   --font-display: var(--font-playfair), "Georgia", "Times New Roman", serif;
   --font-sans: var(--font-inter), "Segoe UI", system-ui, sans-serif;

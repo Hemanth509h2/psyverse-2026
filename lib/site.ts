@@ -5,7 +5,7 @@ export const site = {
   tagline: "Where Psychology Meets Technology",
   theme: {
     lead: "The Evolution of Therapy:",
-    lines: ["What Has Changed,", "What Hasn't,", "and What Comes Next?"],
+    lines: ["What Has Changed,", "What Hasn’t,", "and What Comes Next?"],
   },
   date: "24 October 2026",
   day: "Saturday",

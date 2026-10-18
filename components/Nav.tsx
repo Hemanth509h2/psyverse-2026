@@ -29,11 +29,11 @@ export function Nav() {
         scrolled || open ? "border-b border-line bg-ivory/85 backdrop-blur-md" : "border-b border-transparent bg-transparent"
       }`}
     >
-      <nav className="wrap flex h-20 items-center justify-between gap-6" aria-label="Main">
-        <a href="#top" className="flex shrink-0 items-center gap-3 font-display text-xl font-semibold tracking-wide text-ink">
+      <nav className="wrap flex h-[4.5rem] items-center sm:h-20 justify-between gap-6" aria-label="Main">
+        <a href="#top" className="flex shrink-0 items-center gap-3 font-display text-xl font-bold tracking-wide text-navy">
           <Image src="/staad-logo.png" alt="STAAD logo" width={46} height={46} priority className="h-[46px] w-[46px]" />
           <span>
-            PSYVERSE <span className="font-bold text-purple italic">2026</span>
+            PSYVERSE <span className="text-purple italic">2026</span>
           </span>
         </a>
 
@@ -60,7 +60,7 @@ export function Nav() {
             onClick={() => setOpen((o) => !o)}
           >
             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true">
-              {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 8h16M4 16h16" />}
+              {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M5 7h14M5 12h14M5 17h14" />}
             </svg>
           </button>
         </div>

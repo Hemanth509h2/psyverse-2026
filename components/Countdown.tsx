@@ -49,21 +49,21 @@ export function Countdown() {
 
   return (
     <div
-      className="flex flex-col gap-3 rounded-[1.75rem] bg-purple-mist/70 p-3.5 min-[460px]:flex-row min-[460px]:items-center min-[460px]:gap-5 sm:p-4"
+      className="flex items-center gap-[clamp(0.6rem,3.5vw,1rem)] rounded-[1.25rem] bg-[#f6f2fa] py-3 pr-3 pl-[clamp(0.9rem,4.6vw,1.4rem)] md:rounded-[1.75rem]"
       role="timer"
       aria-live="off"
       aria-label="Time until PSYVERSE 2026 begins"
     >
-      <span className="px-2 pt-1 text-xs leading-relaxed font-semibold tracking-[0.2em] text-[#4b4f5e] uppercase min-[460px]:flex min-[460px]:w-36 min-[460px]:shrink-0 min-[460px]:items-center min-[460px]:self-stretch min-[460px]:border-r min-[460px]:border-purple/15 min-[460px]:pt-0 min-[460px]:pr-4">
+      <span className="flex w-[clamp(3.6rem,23vw,8rem)] shrink-0 items-center self-stretch border-r border-[#ddd3ea] pr-2 text-[clamp(0.45rem,1.85vw,0.75rem)] leading-[1.9] font-medium tracking-[0.18em] text-[#4b4f5e] uppercase">
         The conclave begins in
       </span>
-      <div className="grid flex-1 grid-cols-4 gap-2">
+      <div className="grid flex-1 grid-cols-4 gap-[clamp(0.35rem,1.9vw,0.6rem)]">
         {units.map(([label, v]) => (
-          <span key={label} className="flex flex-col items-center rounded-2xl bg-white px-1 py-3 shadow-[var(--shadow-paper)]">
-            <span className="font-display text-[1.75rem] leading-none font-bold text-purple [font-variant-numeric:lining-nums_tabular-nums] sm:text-[2rem]">
+          <span key={label} className="flex flex-col items-center rounded-[0.8rem] bg-white px-0.5 py-[clamp(0.6rem,2.6vw,0.9rem)] shadow-[0_4px_12px_-8px_rgb(106_54_180_/_0.2)]">
+            <span className="font-display text-[clamp(1rem,5.5vw,2rem)] leading-none font-bold text-purple [font-variant-numeric:lining-nums_tabular-nums]">
               {v === undefined ? "--" : pad(v)}
             </span>
-            <span className="mt-1.5 text-[0.72rem] text-muted sm:text-xs">{label}</span>
+            <span className="mt-1.5 text-[clamp(0.58rem,2.15vw,0.8rem)] text-[#5b6070]">{label}</span>
           </span>
         ))}
       </div>
