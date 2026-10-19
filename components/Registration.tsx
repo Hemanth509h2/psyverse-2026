@@ -12,6 +12,20 @@ const STORAGE_KEY = "psyverse-2026-registered";
 export function Registration() {
   const [registered, setRegistered] = useState(false);
   const [closed, setClosed] = useState(false);
+  const [choosing, setChoosing] = useState(false);
+
+  // Close the popup with Escape, and stop the page scrolling behind it
+  useEffect(() => {
+    if (!choosing) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setChoosing(false);
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = overflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [choosing]);
 
   useEffect(() => {
     setClosed(Date.now() > new Date(site.deadlineISO).getTime());
@@ -88,9 +102,9 @@ export function Registration() {
                   {closed ? (
                     <p className="text-muted">Registration closed on {site.deadline}. Thank you for your interest.</p>
                   ) : (
-                    <a href={site.googleFormUrl} target="_blank" rel="noopener noreferrer" className="btn-primary !px-8 !py-4 text-base">
-                      Register Through Google Form <LineIcon name="external" className="h-4 w-4" />
-                    </a>
+                    <button type="button" onClick={() => setChoosing(true)} className="btn-primary !px-8 !py-4 text-base">
+                      Register Now <LineIcon name="arrow" className="h-4 w-4" />
+                    </button>
                   )}
                   <p className="text-sm text-muted">The form opens in a new tab. Come back here when you are done.</p>
                   <button type="button" onClick={confirm} className="btn-secondary">
@@ -140,6 +154,61 @@ export function Registration() {
           </AnimatePresence>
         </Reveal>
       </div>
+
+      <AnimatePresence>
+        {choosing && (
+          <motion.div
+            key="choose"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[55] flex items-center justify-center bg-navy/40 px-4 backdrop-blur-sm"
+            onClick={() => setChoosing(false)}
+          >
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="register-choose-title"
+              initial={{ opacity: 0, y: 16, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.98 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-md rounded-[2rem] bg-white px-6 py-10 text-center shadow-[var(--shadow-lift)] sm:px-10"
+            >
+              <button
+                type="button"
+                onClick={() => setChoosing(false)}
+                aria-label="Close"
+                className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full text-2xl leading-none text-muted hover:bg-lavender-mist hover:text-ink"
+              >
+                ×
+              </button>
+              <span className="eyebrow">Registration</span>
+              <h3 id="register-choose-title" className="mt-3 text-3xl font-medium text-ink">
+                Who is registering?
+              </h3>
+              <p className="mt-2 text-muted">Pick one to open its Google Form in a new tab.</p>
+              <div className="mt-8 flex flex-col gap-3">
+                {site.registrationForms.map((f, i) => (
+                  <a
+                    key={f.label}
+                    href={f.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setChoosing(false)}
+                    autoFocus={i === 0}
+                    className={`${i === 0 ? "btn-primary" : "btn-secondary"} w-full !py-4 text-base`}
+                  >
+                    {f.label} <LineIcon name="external" className="h-4 w-4" />
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

@@ -28,7 +28,11 @@ export const site = {
 
   quote: "While the tools of therapy evolve, the essence of healing remains rooted in human connection.",
 
-  googleFormUrl: "https://forms.gle/EBkBVCX2nnV5gy4c7",
+  // One Google Form per attendee type, shown as a choice in the registration popup.
+  registrationForms: [
+    { label: "Students", url: "https://docs.google.com/forms/d/e/1FAIpQLSfYV9GELyDseCdW_9zF2Rf2uV-61CpbkQLB_SgvT2nuNfbfLA/viewform?usp=dialog" },
+    { label: "Professionals", url: "https://forms.gle/r74h3L3o1Pf16CfDA" },
+  ],
 
   social: {
     linkedin: "https://www.linkedin.com/company/tecchash-pvt-ltd/",
