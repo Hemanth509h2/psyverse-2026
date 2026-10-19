@@ -1,13 +1,10 @@
 import { LotusMark } from "./Decor";
-import { Parallax } from "./Parallax";
 import { Reveal } from "./Reveal";
-import { CircleOfConversation } from "./illustrations/circle";
-import { StageFuture, StageTechAssisted, StageTraditional } from "./illustrations/scenes";
 
 const arc = [
-  { when: "Past", question: "What has changed", note: "From long sessions in the consulting room to many new ways of reaching care.", Art: StageTraditional, ring: "ring-gold/70" },
-  { when: "Present", question: "What hasn’t", note: "Trust, empathy and careful listening remain at the heart of the work.", Art: StageTechAssisted, ring: "ring-lavender" },
-  { when: "Future", question: "What comes next", note: "How expertise, human connection and technology can grow together.", Art: StageFuture, ring: "ring-teal/70" },
+  { when: "Past", question: "What has changed", note: "From long sessions in the consulting room to many new ways of reaching care.", ring: "ring-gold/70" },
+  { when: "Present", question: "What hasn’t", note: "Trust, empathy and careful listening remain at the heart of the work.", ring: "ring-lavender" },
+  { when: "Future", question: "What comes next", note: "How expertise, human connection and technology can grow together.", ring: "ring-teal/70" },
 ];
 
 const topics = [
@@ -54,9 +51,7 @@ export function Conversation() {
             const item = (
               <Reveal as="li" key={a.when} delay={i * 0.15} className="flex flex-col items-center text-center">
                 <span className={`flex h-28 w-28 items-center justify-center rounded-full bg-white shadow-[var(--shadow-soft)] ring-2 ring-offset-4 ring-offset-ivory ${a.ring}`}>
-                  <span className="block h-20 w-24">
-                    <a.Art />
-                  </span>
+                  <span className={`font-display text-4xl ${i === 2 ? "text-teal-dark" : "text-lavender-deep"}`}>0{i + 1}</span>
                 </span>
                 <span className={`mt-6 text-xs font-semibold tracking-[0.2em] uppercase ${i === 2 ? "text-teal-dark" : "text-lavender-deep"}`}>{a.when}</span>
                 <h3 className="mt-2 text-2xl font-medium text-ink">{a.question}</h3>
@@ -73,16 +68,10 @@ export function Conversation() {
           })}
         </ol>
 
-        {/* one illustration beside the discussion topics */}
-        <div className="mt-24 grid items-center gap-14 md:mt-32 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
-          <Reveal>
-            <Parallax distance={18}>
-              <CircleOfConversation className="mx-auto h-auto w-full max-w-[640px]" />
-            </Parallax>
-          </Reveal>
-
+        {/* discussion topics */}
+        <div className="mx-auto mt-24 max-w-3xl md:mt-32">
           <div>
-            <Reveal>
+            <Reveal className="text-center">
               <span className="eyebrow">Key discussion topics</span>
               <h3 className="mt-4 text-3xl leading-tight font-medium text-ink md:text-4xl">
                 What the panel <em className="text-lavender-deep">will explore</em>

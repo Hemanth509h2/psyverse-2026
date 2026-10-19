@@ -1,15 +1,8 @@
 import { site } from "@/lib/site";
 import { Countdown } from "./Countdown";
 import { PaperLayers } from "./Decor";
-import { C, Wash } from "./illustrations/base";
-import { PanelCoverScene } from "./illustrations/panel";
 import { LineIcon } from "./illustrations/icons";
-import { Parallax } from "./Parallax";
 import { Reveal } from "./Reveal";
-
-// Matches the arch drawn in the illustration, so the paper layers line up with it.
-const archBox = "absolute top-[4.4%] right-[5%] bottom-[3%] left-[5%]";
-const archRadius = "50% 50% 0 0 / 43% 43% 0 0";
 
 /* Solid purple icons for the three info chips */
 function CalendarIcon({ className }: { className: string }) {
@@ -88,9 +81,9 @@ export function Hero() {
     <section id="top" className="relative isolate overflow-hidden">
       <PaperLayers className="absolute right-0 bottom-0 left-0 -z-10 h-40 w-full md:h-56" />
 
-      <div className="wrap grid items-center gap-12 pt-5 pb-24 sm:pt-8 sm:pb-32 md:pt-10 lg:grid-cols-[1.12fr_1fr] lg:gap-14 lg:pb-40">
-        {/* left: what the event is, the theme, and how to register */}
-        <div className="flex min-w-0 flex-col">
+      <div className="wrap grid pt-5 pb-24 sm:pt-8 sm:pb-32 md:pt-10 lg:grid-cols-[1.12fr_1fr] lg:gap-x-14 lg:pb-40">
+        {/* top left: what the event is */}
+        <div className="flex min-w-0 flex-col lg:col-start-1 lg:row-start-1">
           <Reveal immediate className="px-3 sm:px-0">
             <p className="text-[0.56rem] font-semibold tracking-[0.28em] text-purple uppercase sm:text-xs">A Professional Psychology Conclave</p>
             <h1 className="mt-1 flex flex-col font-display sm:mt-4">
@@ -133,72 +126,36 @@ export function Hero() {
               </li>
             </ul>
           </Reveal>
-
-          {/* the theme */}
-          <Reveal immediate delay={0.16} className="mt-4">
-            <figure className="relative isolate overflow-hidden rounded-[1.25rem] bg-[linear-gradient(100deg,#f6f1fc_0%,#f1e9fa_100%)] px-[5.3vw] py-[4.4vw] sm:px-6 sm:py-5 md:rounded-[1.75rem] md:p-10 lg:px-9 lg:py-7">
-              <MindProfile className="pointer-events-none absolute right-0 bottom-0 -z-10 h-[91%] w-auto text-[#7a4cc0] lg:right-12 lg:h-[82%] lg:overflow-visible" />
-              <figcaption className="text-[0.56rem] font-semibold tracking-[0.28em] text-purple uppercase sm:text-xs">The conclave theme</figcaption>
-              <blockquote className="mt-3 font-display">
-                <span className="block max-w-[7.4em] text-[clamp(1.35rem,7vw,2.9rem)] lg:text-[2.35rem] leading-[1.02] font-bold text-navy">{site.theme.lead}</span>
-                {site.theme.lines.map((l, i) => (
-                  <span
-                    key={l}
-                    className={`block text-[clamp(0.95rem,4.8vw,2.2rem)] leading-[1.08] lg:text-[1.65rem] ${i === 2 ? "font-bold text-purple italic" : "text-[#55586a]"} ${i === 0 ? "mt-1" : ""}`}
-                  >
-                    {l}
-                  </span>
-                ))}
-              </blockquote>
-            </figure>
-          </Reveal>
-
-          {/* register */}
-          <Reveal immediate delay={0.2} className="mt-4 flex flex-col items-center gap-2.5 text-center sm:mt-6 lg:hidden">
-            <ReserveButton />
-          </Reveal>
-
-          <Reveal immediate delay={0.24} className="mt-4 sm:mt-6 lg:hidden">
-            <Countdown />
-          </Reveal>
         </div>
 
-        {/* right: the illustration in layered paper */}
-        <Reveal immediate delay={0.12} className="relative min-w-0 lg:mt-2 lg:self-start">
-          <div className="relative mx-auto w-full max-w-[640px] lg:max-w-[27rem]">
-            {/* background blob */}
-            <svg viewBox="0 0 600 600" className="pointer-events-none absolute -inset-[8%] -z-10 h-[116%] w-[116%]" aria-hidden="true">
-              <Wash d="M70,300 C40,150 170,40 320,50 C470,60 570,170 550,320 C530,470 410,560 280,550 C140,540 95,430 70,300 Z" fill={C.lav} opacity={0.22} />
-              <Wash d="M380,470 C420,420 520,430 540,490 C560,550 480,590 430,570 C380,550 350,510 380,470 Z" fill={C.teal} opacity={0.1} />
-            </svg>
-
-            <Parallax distance={18}>
-              <div className="relative">
-                <div className={`${archBox} translate-x-7 translate-y-7 bg-teal-mist shadow-[var(--shadow-paper)]`} style={{ borderRadius: archRadius }} aria-hidden="true" />
-                <div className={`${archBox} translate-x-3.5 translate-y-3.5 bg-lavender-mist shadow-[var(--shadow-paper)]`} style={{ borderRadius: archRadius }} aria-hidden="true" />
-                <div className={`${archBox} shadow-[var(--shadow-lift)]`} style={{ borderRadius: archRadius }} aria-hidden="true" />
-                <PanelCoverScene className="relative h-auto w-full" />
-              </div>
-            </Parallax>
-
-            {/* floating foreground paper shapes */}
-            <svg viewBox="0 0 120 120" className="float-slow pointer-events-none absolute -top-2 -right-4 h-24 w-24" aria-hidden="true">
-              <path d="M60,10 C90,30 96,80 60,110 C24,80 30,30 60,10 Z" fill={C.lavMist} filter="url(#paper)" />
-              <path d="M60,22 C60,50 60,80 60,104" stroke={C.lav} strokeWidth="1.5" fill="none" />
-            </svg>
-            <svg viewBox="0 0 120 120" className="float-slower pointer-events-none absolute top-[42%] -left-8 h-20 w-20" aria-hidden="true">
-              <path d="M20,70 C30,30 80,20 104,40 C90,80 50,96 20,70 Z" fill={C.sageMist} filter="url(#paper)" />
-              <path d="M28,68 C50,56 74,46 98,42" stroke={C.sage} strokeWidth="1.5" fill="none" />
-            </svg>
-
-            {/* laptops: register and countdown under the illustration, visible without scrolling */}
-            <div className="relative z-10 mt-10 hidden flex-col items-center gap-2.5 text-center lg:-mx-12 lg:flex">
-              <ReserveButton />
-              <div className="mt-3 w-full">
-                <Countdown />
-              </div>
-            </div>
+        {/* the theme: under the chips on phones; beside the title on laptops, with the countdown under it */}
+        <Reveal immediate delay={0.16} className="relative mt-4 min-w-0 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0 lg:self-center">
+          <figure className="relative isolate overflow-hidden rounded-[1.25rem] bg-[linear-gradient(100deg,#f6f1fc_0%,#f1e9fa_100%)] px-[5.3vw] py-[4.4vw] sm:px-6 sm:py-5 md:rounded-[1.75rem] md:p-10 lg:rounded-[2rem] lg:px-10 lg:py-9 lg:shadow-[var(--shadow-lift)]">
+            <MindProfile className="pointer-events-none absolute right-0 bottom-0 -z-10 h-[91%] w-auto text-[#7a4cc0] lg:right-4 lg:h-[88%]" />
+            <figcaption className="text-[0.56rem] font-semibold tracking-[0.28em] text-purple uppercase sm:text-xs">The conclave theme</figcaption>
+            <blockquote className="mt-3 font-display">
+              <span className="block max-w-[7.4em] text-[clamp(1.35rem,7vw,2.9rem)] leading-[1.02] font-bold text-navy lg:text-[2.35rem]">{site.theme.lead}</span>
+              {site.theme.lines.map((l, i) => (
+                <span
+                  key={l}
+                  className={`block text-[clamp(0.95rem,4.8vw,2.2rem)] leading-[1.08] lg:text-[1.6rem] ${i === 2 ? "font-bold text-purple italic" : "text-[#55586a]"} ${i === 0 ? "mt-1 lg:mt-2" : ""}`}
+                >
+                  {l}
+                </span>
+              ))}
+            </blockquote>
+          </figure>
+          <div className="mt-6 hidden lg:block">
+            <Countdown />
           </div>
+        </Reveal>
+
+        {/* register under the chips, then the countdown on phones */}
+        <Reveal immediate delay={0.2} className="mt-4 flex flex-col items-center gap-2.5 text-center sm:mt-6 lg:col-start-1 lg:row-start-2 lg:mt-10 lg:items-start lg:self-center lg:text-left">
+          <ReserveButton />
+        </Reveal>
+        <Reveal immediate delay={0.24} className="mt-4 min-w-0 sm:mt-6 lg:hidden">
+          <Countdown />
         </Reveal>
       </div>
     </section>

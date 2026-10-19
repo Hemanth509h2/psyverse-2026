@@ -66,82 +66,6 @@ export function Wash({ d, fill, opacity = 0.5, small, transform }: WashProps) {
   return <path d={d} fill={fill} opacity={opacity} filter={`url(#${small ? "wc-sm" : "wc"})`} transform={transform} />;
 }
 
-type HairStyle = "short" | "long" | "bun";
-type FigureProps = {
-  x: number;
-  y: number;
-  scale?: number;
-  facing?: "left" | "right";
-  skin?: string;
-  hair?: string;
-  hairStyle?: HairStyle;
-  top?: string;
-  bottom?: string;
-  holding?: "notebook" | "cup" | null;
-};
-
-/** A seated person. Origin is the seat; knees point toward `facing`. */
-export function SeatedFigure({
-  x, y, scale = 1, facing = "right",
-  skin = C.skin[0], hair = C.hair[0], hairStyle = "short",
-  top = C.lav, bottom = C.ink, holding = null,
-}: FigureProps) {
-  const flip = facing === "left" ? -1 : 1;
-  return (
-    <g transform={`translate(${x} ${y}) scale(${flip * scale} ${scale})`} filter="url(#wc-sm)">
-      {hairStyle === "long" && <path d="M-17,-96 C-21,-122 19,-122 17,-96 L18,-64 L-20,-64 Z" fill={hair} />}
-      {/* lower leg and foot */}
-      <path d="M34,-2 L47,-2 L49,48 L36,48 Z" fill={bottom} opacity="0.92" />
-      <ellipse cx="49" cy="50" rx="13" ry="5" fill={C.ink} />
-      {/* thigh */}
-      <path d="M-20,-8 L40,-10 C50,-10 52,4 46,10 L-18,12 Z" fill={bottom} />
-      {/* torso */}
-      <path d="M-22,-4 C-27,-42 -20,-72 -3,-76 C12,-78 22,-62 19,-30 L17,-4 Z" fill={top} />
-      {/* neck and head */}
-      <rect x="-5" y="-84" width="10" height="10" rx="3" fill={skin} />
-      <circle cx="1" cy="-94" r="15" fill={skin} />
-      {hairStyle !== "long" && <path d="M-15,-95 C-17,-114 14,-116 16,-98 C10,-106 -2,-108 -15,-95 Z" fill={hair} />}
-      {hairStyle === "long" && <path d="M-15,-96 C-16,-114 16,-115 16,-98 C8,-106 -4,-107 -15,-96 Z" fill={hair} />}
-      {hairStyle === "bun" && <circle cx="-9" cy="-111" r="7" fill={hair} />}
-      {/* arm resting toward the knee */}
-      <path d="M-4,-66 C-10,-42 0,-22 26,-18" stroke={top} strokeWidth="10" strokeLinecap="round" fill="none" />
-      <path d="M-4,-66 C-10,-42 0,-22 26,-18" stroke={C.ink} strokeOpacity="0.08" strokeWidth="10" strokeLinecap="round" fill="none" />
-      <circle cx="29" cy="-18" r="5.5" fill={skin} />
-      {holding === "notebook" && <rect x="22" y="-34" width="18" height="22" rx="2" fill={C.gold} transform="rotate(-18 31 -23)" />}
-      {holding === "cup" && <path d="M24,-30 h12 v10 a6,6 0 0 1 -12,0 Z" fill={C.white} stroke={C.lavDeep} strokeWidth="1.2" />}
-    </g>
-  );
-}
-
-/** A soft armchair to sit a SeatedFigure on. Same origin and facing. */
-export function Armchair({ x, y, scale = 1, facing = "right", color = C.sage }: { x: number; y: number; scale?: number; facing?: "left" | "right"; color?: string }) {
-  const flip = facing === "left" ? -1 : 1;
-  return (
-    <g transform={`translate(${x} ${y}) scale(${flip * scale} ${scale})`} filter="url(#wc-sm)">
-      <path d="M-46,-100 C-46,-112 -26,-112 -26,-100 L-22,10 L-46,10 Z" fill={color} />
-      <path d="M-46,-6 C-46,-14 -40,-16 -30,-16 L44,-16 C54,-16 58,-10 58,-2 L58,16 L-46,16 Z" fill={color} />
-      <path d="M-46,16 L58,16 L58,24 L-46,24 Z" fill={color} opacity="0.75" />
-      <path d="M-40,24 L-42,44 M52,24 L54,44" stroke={C.sageDeep} strokeWidth="4" strokeLinecap="round" />
-    </g>
-  );
-}
-
-/** Head and shoulders. Origin is the centre of the shoulders' base. */
-export function Bust({
-  x, y, scale = 1, skin = C.skin[0], hair = C.hair[0], top = C.lav, hairStyle = "short",
-}: { x: number; y: number; scale?: number; skin?: string; hair?: string; top?: string; hairStyle?: HairStyle }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${scale})`} filter="url(#wc-sm)">
-      {hairStyle === "long" && <path d="M-14,-30 C-17,-52 17,-52 14,-30 L16,-8 L-16,-8 Z" fill={hair} />}
-      <path d="M-26,0 C-26,-18 -14,-24 0,-24 C14,-24 26,-18 26,0 Z" fill={top} />
-      <rect x="-4" y="-30" width="8" height="8" rx="2" fill={skin} />
-      <circle cx="0" cy="-38" r="12" fill={skin} />
-      <path d="M-12,-39 C-14,-54 12,-55 13,-41 C8,-47 -2,-48 -12,-39 Z" fill={hair} />
-      {hairStyle === "bun" && <circle cx="-6" cy="-52" r="5.5" fill={hair} />}
-    </g>
-  );
-}
-
 /** Abstract brain in line art, with a lavender wash behind it. Origin is its centre. */
 export function BrainArt({ x, y, scale = 1, wash = true }: { x: number; y: number; scale?: number; wash?: boolean }) {
   return (
@@ -160,18 +84,6 @@ export function BrainArt({ x, y, scale = 1, wash = true }: { x: number; y: numbe
       {/* leaves growing from the stem */}
       <Wash small d="M24,72 C34,58 52,58 58,64 C50,74 36,78 24,72 Z" fill={C.sage} opacity={0.85} />
       <Wash small d="M22,74 C12,62 -4,64 -8,70 C0,80 14,82 22,74 Z" fill={C.sage} opacity={0.65} />
-    </g>
-  );
-}
-
-/** A small potted plant. Origin is the base of the pot. */
-export function Plant({ x, y, scale = 1 }: { x: number; y: number; scale?: number }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${scale})`} filter="url(#wc-sm)">
-      <path d="M0,-30 C-4,-52 -22,-62 -30,-58 C-26,-44 -14,-34 0,-30 Z" fill={C.sage} />
-      <path d="M2,-30 C6,-56 24,-66 32,-60 C28,-46 16,-34 2,-30 Z" fill={C.sageDeep} opacity="0.85" />
-      <path d="M1,-32 C0,-60 8,-74 14,-78 C16,-62 10,-44 1,-32 Z" fill={C.sage} opacity="0.9" />
-      <path d="M-14,-30 L14,-30 L10,0 L-10,0 Z" fill={C.gold} />
     </g>
   );
 }

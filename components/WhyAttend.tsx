@@ -1,12 +1,11 @@
 import { OrganicBackdrop } from "./Decor";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
-import { WhyProfessionals, WhyResearchers, WhyStudents } from "./illustrations/scenes";
 
 const groups = [
-  { who: "Students", points: ["Career exploration", "Networking", "Learning"], Art: WhyStudents },
-  { who: "Professionals", points: ["Discussion", "Collaboration", "Knowledge exchange"], Art: WhyProfessionals },
-  { who: "Researchers", points: ["Emerging insights", "Future trends", "Connections"], Art: WhyResearchers },
+  { who: "Students", points: ["Career exploration", "Networking", "Learning"] },
+  { who: "Professionals", points: ["Discussion", "Collaboration", "Knowledge exchange"] },
+  { who: "Researchers", points: ["Emerging insights", "Future trends", "Connections"] },
 ];
 
 function Leaf() {
@@ -28,12 +27,9 @@ export function WhyAttend() {
           title={<>A place for everyone <em className="text-lavender-deep">who cares about the mind</em></>}
         />
         <div className="grid gap-8 md:grid-cols-3">
-          {groups.map(({ who, points, Art }, i) => (
-            <Reveal key={who} delay={i * 0.1} className="flex flex-col items-center text-center">
-              <div className="w-full max-w-[18rem]">
-                <Art />
-              </div>
-              <h3 className="mt-4 text-3xl font-medium text-ink">{who}</h3>
+          {groups.map(({ who, points }, i) => (
+            <Reveal key={who} delay={i * 0.1} className="card flex flex-col items-center px-8 py-10 text-center">
+              <h3 className="text-3xl font-medium text-ink">{who}</h3>
               <span className="my-4 h-px w-12 bg-gold" aria-hidden="true" />
               <ul className="flex flex-col gap-2.5">
                 {points.map((p) => (
