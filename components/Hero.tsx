@@ -60,22 +60,6 @@ function ReserveButton() {
   );
 }
 
-/** Line drawing of a head in profile with a looping brain, for the theme card. */
-function MindProfile({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 138 188" className={className} fill="none" aria-hidden="true">
-      <circle cx="95" cy="90" r="95" fill="#ebe2f7" opacity="0.75" />
-      <g stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M53,188 C47,172 36,162 25,157 C19,154 15,152 16,149 L14,142 L9,137 L11,132 L8,128 L11,123 L3.5,114 L12,97 C13,80 17,66 25,55 C36,40 50,33 65,31 C92,28 115,42 120,65 C125,88 122,115 122,140 C122,160 128,172 136,182" />
-        <path d="M45,80 C40,62 55,50 72,52 C90,54 100,62 104,74 C108,88 98,100 84,98 C74,97 70,88 77,84 C84,80 90,88 85,93" />
-        <path d="M60,70 C62,62 72,60 75,66 C78,72 70,76 66,72" />
-        <path d="M88,66 C94,64 98,70 94,74" />
-        <path d="M60,88 C56,96 62,104 70,100" />
-      </g>
-    </svg>
-  );
-}
-
 export function Hero() {
   return (
     <section id="top" className="relative isolate overflow-hidden">
@@ -131,18 +115,16 @@ export function Hero() {
         {/* the theme: under the chips on phones; beside the title on laptops, with the countdown under it */}
         <Reveal immediate delay={0.16} className="relative mt-4 min-w-0 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0 lg:self-center">
           <figure className="relative isolate overflow-hidden rounded-[1.25rem] bg-[linear-gradient(100deg,#f6f1fc_0%,#f1e9fa_100%)] px-[5.3vw] py-[4.4vw] sm:px-6 sm:py-5 md:rounded-[1.75rem] md:p-10 lg:rounded-[2rem] lg:px-10 lg:py-9 lg:shadow-[var(--shadow-lift)]">
-            <MindProfile className="pointer-events-none absolute right-0 bottom-0 -z-10 h-[91%] w-auto text-[#7a4cc0] lg:right-4 lg:h-[88%]" />
             <figcaption className="text-[0.56rem] font-semibold tracking-[0.28em] text-purple uppercase sm:text-xs">The conclave theme</figcaption>
             <blockquote className="mt-3 font-display">
-              <span className="block max-w-[7.4em] text-[clamp(1.35rem,7vw,2.9rem)] leading-[1.02] font-bold text-navy lg:text-[2.35rem]">{site.theme.lead}</span>
-              {site.theme.lines.map((l, i) => (
-                <span
-                  key={l}
-                  className={`block text-[clamp(0.95rem,4.8vw,2.2rem)] leading-[1.08] lg:text-[1.6rem] ${i === 2 ? "font-bold text-purple italic" : "text-[#55586a]"} ${i === 0 ? "mt-1 lg:mt-2" : ""}`}
-                >
-                  {l}
-                </span>
-              ))}
+              <span className="block text-[clamp(1.35rem,7vw,2.9rem)] leading-[1.02] font-bold text-navy lg:text-[2.35rem]">{site.theme.lead}</span>
+              {/* "What Has Changed, What Hasn't," share a line; the question sits under them */}
+              <span className="mt-1 block text-[clamp(0.95rem,4.8vw,2.2rem)] leading-[1.08] text-[#55586a] lg:mt-2 lg:text-[1.6rem]">
+                {site.theme.lines.slice(0, -1).join(" ")}
+              </span>
+              <span className="block text-[clamp(0.95rem,4.8vw,2.2rem)] leading-[1.08] font-bold text-purple italic lg:text-[1.6rem]">
+                {site.theme.lines.at(-1)}
+              </span>
             </blockquote>
           </figure>
           <div className="mt-6 hidden lg:block">
