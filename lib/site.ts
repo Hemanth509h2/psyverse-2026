@@ -12,9 +12,9 @@ export const site = {
   time: "9:30 AM – 1:00 PM",
   venue: { room: "G04 Auditorium", institute: "HITAM", city: "Hyderabad" },
   fee: "₹100",
-  deadline: "22 October 2026",
+  deadline: "23 October 2026",
   // End of the last registration day, India time. Used to show "Registrations closed".
-  deadlineISO: "2026-10-22T23:59:59+05:30",
+  deadlineISO: "2026-10-23T23:59:59+05:30",
   // Start and end of the conclave, India time. Used by the countdown.
   startISO: "2026-10-24T09:30:00+05:30",
   endISO: "2026-10-24T13:00:00+05:30",
