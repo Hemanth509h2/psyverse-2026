@@ -18,7 +18,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "PSYVERSE 2026 | Where Psychology Meets Technology",
   description:
-    "A professional psychology conclave on the evolution of therapy. 24 October 2026, 9:30 AM to 1:00 PM, G04 Auditorium, HITAM, Hyderabad.",
+    "A professional psychology conclave on the evolution of therapy. 28 October 2026, 9:30 AM to 1:00 PM, G04 Auditorium, HITAM, Hyderabad.",
   openGraph: {
     title: "PSYVERSE 2026",
     description: "The Evolution of Therapy: What Has Changed, What Hasn't, and What Comes Next?",

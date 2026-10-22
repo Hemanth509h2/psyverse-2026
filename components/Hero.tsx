@@ -88,7 +88,7 @@ export function Hero() {
               <li className="flex items-center rounded-[0.9rem] border border-[#efe8f7] bg-[#fbf9fd] py-[3.2vw] pr-[0.8vw] shadow-[0_6px_16px_-10px_rgb(106_54_180_/_0.18)] sm:gap-3 sm:py-3.5 sm:pr-2 sm:pl-4 gap-[3vw] pl-[3.9vw]">
                 <CalendarIcon className="h-[4.6vw] w-[4.6vw] sm:h-6 sm:w-6" />
                 <span className="min-w-0 leading-snug whitespace-nowrap">
-                  <span className="block text-[2.75vw] text-navy sm:text-[0.95rem]">24 October</span>
+                  <span className="block text-[2.75vw] text-navy sm:text-[0.95rem]">28 October</span>
                   <span className="block text-[2.3vw] text-[#5b6070] sm:text-[0.85rem]">{site.time.replace(":00 PM", " PM")}</span>
                 </span>
               </li>
