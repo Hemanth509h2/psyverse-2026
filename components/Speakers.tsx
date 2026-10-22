@@ -24,17 +24,17 @@ export function Speakers() {
           intro="Senior psychologists and mental-health professionals, together in one open conversation. More panellists will be announced soon."
         />
 
-        <ul className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="grid grid-cols-2 gap-4 sm:gap-7 lg:grid-cols-4">
           {panel.map((s, i) => (
             <Reveal as="li" key={i} delay={i * 0.08} className="group card flex flex-col overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]">
               <div className="relative aspect-[4/5] overflow-hidden bg-beige">
-                <Portrait s={s} index={i} sizes="(min-width: 1024px) 20rem, (min-width: 640px) 50vw, 100vw" />
+                <Portrait s={s} index={i} sizes="(min-width: 1024px) 20rem, 50vw" />
               </div>
-              <div className="flex flex-1 flex-col gap-1.5 px-7 py-7">
-                <h3 className="text-2xl leading-snug font-medium text-ink">{s.name}</h3>
-                <p className="font-medium text-lavender-deep">{s.specialization}</p>
-                <p className="text-sm text-muted">{s.organization}</p>
-                {s.bio && <p className="mt-3 border-t border-line pt-4 text-sm leading-relaxed text-muted">{s.bio}</p>}
+              <div className="flex flex-1 flex-col gap-1 px-4 py-5 sm:gap-1.5 sm:px-7 sm:py-7">
+                <h3 className="text-lg leading-snug font-medium text-ink sm:text-2xl">{s.name}</h3>
+                <p className="text-sm font-medium text-lavender-deep sm:text-base">{s.specialization}</p>
+                <p className="text-xs text-muted sm:text-sm">{s.organization}</p>
+                {s.bio && <p className="mt-2 border-t border-line pt-3 text-xs leading-relaxed text-muted sm:mt-3 sm:pt-4 sm:text-sm">{s.bio}</p>}
               </div>
             </Reveal>
           ))}
